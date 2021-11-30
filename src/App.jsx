@@ -43,35 +43,107 @@ function App() {
       <button
         onClick={() => {
           const items = bubbleSort(array);
+          const sync = (color, id, items) => {
+            setTimeout(() => {
+              items[id].style.backgroundColor = color;
+            }, 1000);
+          };
+          let pointer = 0;
           for (let [i, id] of Object.entries(items)) {
             const items = [...document.getElementsByClassName("item")];
-            //animatioms
-            // const index = document.getElementById(id[0]).style;
-            // const j = document.getElementById(id[1]).style;
-            //toggle colors
+
+            console.log(id[2], id[1]);
+            // items[id[0]].style.backgroundColor = "red";
+            // if (id[1] == id[2]) {
+            //   setTimeout(() => {
+            //     items[id[0]].style.backgroundColor = "red";
+            //   }, i * 10);
+            //   pointer++;
+            //   console.log(pointer);
+            // } else {
+            //   setTimeout(() => {
+            //     items[id[0]].style.backgroundColor = "black";
+            //   }, i * 10);
+            // }
+
             if (id.includes("swap")) {
               setTimeout(() => {
                 items[id[0]].style.height = id[3] + "%";
                 items[id[1]].style.height = id[2] + "%";
                 items[id[0]].style.backgroundColor = "green";
                 items[id[1]].style.backgroundColor = "blue";
-                setTimeout(() => {
+                setTimeout(function () {
                   items[id[0]].style.backgroundColor = "red";
                   items[id[1]].style.backgroundColor = "red";
-                }, 10 * i);
+                }, 100);
               }, i * 50);
             } else {
-              setTimeout(() => {
-                if (items[id[1]] && items[id[0]]) {
-                  items[id[0]].style.backgroundColor = "black";
-                  items[id[1]].style.backgroundColor = "pink";
-                  setTimeout(() => {
-                    items[id[0]].style.backgroundColor = "red";
-                    items[id[1]].style.backgroundColor = "red";
-                  }, 10 * i);
-                }
-              }, i * 50);
+              if (id[1] == id[2]) {
+                sync("red", id[0], items);
+                console.log(pointer);
+              } else {
+                sync("black", id[0], items);
+              }
             }
+            /*
+            
+            30 is black 
+            when j = 30 set 30 = red
+            set 29 = black
+            when j == 29
+  
+            */
+            // if (id[1] == array.length - 1) {
+            //   setTimeout(() => {
+            //     items[keepTrackOfI].style.backgroundColor = "red";
+            //   }, i * 50);
+            //   keepTrackOfI.push(id[0]);
+            // } else {
+            //   setTimeout(() => {
+            //     items[id[0]].style.backgroundColor = "black";
+            //     pointer++;
+            //   }, i * 50);
+            // }
+
+            /*
+              show where i is
+              i need to change i back to red when we finished the iteration of the array
+              get values that are not swapped and % arr.length == 0
+
+              for each iteration i want to check to see if we chnage i to red
+              show what we are comparing
+            */
+            // if (!id.includes("swap")) {
+            //   keepTrackOfI++;
+            // }
+            //animatioms
+            // const index = document.getElementById(id[0]).style;
+            // const j = document.getElementById(id[1]).style;
+            //toggle colors
+            // if (id.includes("swap")) {
+            //   setTimeout(() => {
+            //     items[id[0]].style.height = id[3] + "%";
+            //     items[id[1]].style.height = id[2] + "%";
+            //     // items[id[0]].style.backgroundColor = "green";
+            //     // items[id[1]].style.backgroundColor = "blue";
+            //     setTimeout(() => {
+            //       items[id[0]].style.backgroundColor = "red";
+            //       items[id[1]].style.backgroundColor = "red";
+            //     }, 1 * i);
+            //   }, i * 100);
+            // } else {
+            //   setTimeout(() => {
+            //     if (items[id[1]] && items[id[0]]) {
+            //       items[id[1]].style.backgroundColor = "pink";
+
+            //       items[id[0]].style.backgroundColor = "black";
+
+            //       setTimeout(() => {
+            //         // items[id[0]].style.backgroundColor = "red";
+            //         items[id[1]].style.backgroundColor = "red";
+            //       }, 1 * i);
+            //     }
+            //   }, i * 100);
 
             /*
 
@@ -99,14 +171,18 @@ function App() {
             //     j.height = id[0] + "px";
             //   }, i * 100);
             // }
-          }
-          /*
+
+            /*
           
           */
+          }
         }}
       >
         bubble sort
       </button>
+      <button>insertion sort</button>
+      <button>radix sort</button>
+      <button>merge sort</button>
       <button
         onClick={() => {
           setArray(

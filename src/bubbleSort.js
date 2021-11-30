@@ -32,17 +32,16 @@ export const bubbleSort = (arr, updateArr, tick) => {
     use while loop
 
     */
-
+  let counter = 0;
   for (let i = arr.length; i > 0; i--) {
+    counter++;
     for (let j = 0; j < i; j++) {
-      animations.push([i, j]);
-
+      // animations.push([i - 1, j, arr.length - counter]);
       if (arr[j] > arr[i]) {
         let temp = arr[i];
         let tj = arr[j];
         arr[i] = arr[j];
         arr[j] = temp;
-
         animations.push([i, j, temp, tj, "swap"]);
       }
     }
