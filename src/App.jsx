@@ -48,10 +48,31 @@ function App() {
             //animatioms
             // const index = document.getElementById(id[0]).style;
             // const j = document.getElementById(id[1]).style;
-            setTimeout(() => {
-              items[id[0]].style.height = id[3] + "px";
-              items[id[1]].style.height = id[2] + "px";
-            }, i * 50);
+            //toggle colors
+            if (id.includes("swap")) {
+              setTimeout(() => {
+                items[id[0]].style.height = id[3] + "%";
+                items[id[1]].style.height = id[2] + "%";
+                items[id[0]].style.backgroundColor = "green";
+                items[id[1]].style.backgroundColor = "blue";
+                setTimeout(() => {
+                  items[id[0]].style.backgroundColor = "red";
+                  items[id[1]].style.backgroundColor = "red";
+                }, 10 * i);
+              }, i * 50);
+            } else {
+              setTimeout(() => {
+                if (items[id[1]] && items[id[0]]) {
+                  items[id[0]].style.backgroundColor = "black";
+                  items[id[1]].style.backgroundColor = "pink";
+                  setTimeout(() => {
+                    items[id[0]].style.backgroundColor = "red";
+                    items[id[1]].style.backgroundColor = "red";
+                  }, 10 * i);
+                }
+              }, i * 50);
+            }
+
             /*
 
             */
