@@ -21,90 +21,103 @@ export const bubbleSort = async (arr, items) => {
     return hi;
   };
   let index = 0;
+  let counter = 0;
   let stop = false;
-  while (index < 600) {
-    index++;
-    j++;
-    /*
-        reset color meaning clear previous background colors;
-        reset i and j after they hot arr,length and check to see if we made any changes;
-  
-        fix j bug 
-        fix colors
-        make it sort properly
-        have a state to end
-  
-      we are dragging greatest value at the end 
-     [30,23,455,24];
-     let i = arr[i];
-     let j  = arr[i + 1]
-  if(i < j){
-    i = j 
-    j = next
-  }
-  30 > 23
-  items[j] = i
-  items[i] = j
-  
-      compare i and j
-      move up i and j
-      placed when value is placed at the end hightlight it green
-      if we are done sorting break
-        */
-    /*
-        items
-        arr[itrations] 
-  
-        swap
-        we never swap the values in our array
-       */
+  let bubble;
+  bubble = setInterval(() => {
+    if (arr[iteration.j] < arr[iteration.i]) {
+      // console.log(items[iteration.j], items[iteration.i]);
+      // console.log(arr[iteration.j], arr[iteration.i]);
+      /*
+        [40,30]
+        30,40
+        40 = 30
+        30 = 40
+*/ stop = true;
+      let temp = arr[iteration.j];
+      arr[iteration.j] = arr[iteration.i];
+      arr[iteration.i] = temp;
+      items[iteration.i].style.height = arr[iteration.i] + "%";
+      items[iteration.j].style.height = arr[iteration.j] + "%";
+    }
+    if (iteration.j == arr.length - (1 + counter)) {
+      items[iteration.j].style.backgroundColor = "red";
+      iteration.j = 1;
+      counter++;
+      //get sorted bar turn htem into green
+      if (stop) stop = false;
+      else {
+        items[iteration.j].style.backgroundColor = "#28E0D4";
+        items[iteration.i].style.backgroundColor = "#28E0D4";
+        items.forEach((elem) => {
+          elem.style.backgroundColor = "#28E0D4";
+        });
+        clearInterval(bubble);
+      }
+    } else {
+      iteration.j++;
+      console.log(counter);
+      items[iteration.j].style.backgroundColor = "rgb(84, 189, 221)";
+    }
+    if (iteration.i == arr.length - (1 + counter)) {
+      items[iteration.i].style.backgroundColor = "#04948A";
+      iteration.i = 0;
+      //get sorted bar turn htem into green
+      /*
+        how can we get the sorted bar    
+      */
+      items[items.length - counter].style.backgroundColor = "#28E0D4";
+    } else {
+      items[iteration.i].style.backgroundColor = "#04948a";
+      iteration.i++;
+      items[iteration.i].style.backgroundColor = "#FFA159";
+    }
+  }, 30);
 
-    ((j, iteration) => {
-      setTimeout(() => {
-        if (arr[iteration.j] < arr[iteration.i]) {
-          // console.log(items[iteration.j], items[iteration.i]);
-          // console.log(arr[iteration.j], arr[iteration.i]);
-          /*
-          [40,30]
-          30,40
-          40 = 30
-          30 = 40
-  */ iteration.sorted = true;
-          let temp = arr[iteration.j];
-          arr[iteration.j] = arr[iteration.i];
-          arr[iteration.i] = temp;
-          items[iteration.i].style.height = arr[iteration.i] + "%";
-          items[iteration.j].style.height = arr[iteration.j] + "%";
-        }
-        if (iteration.j === arr.length - (1 + iteration.done) ) {
-          items[iteration.j].style.backgroundColor = "red";
-          iteration.j = 1;
-          iteration.done++;
-          console.log(iteration.done)
-          if (iteration.sorted) iteration.sorted = false;
-          else {
-            iteration.sorted = "done";
-          }
-        } else {
-          console.log(iteration.done)
+  // while (bubble) {
+  //   index++;
+  //   j++;
+  //   /*
+  //   true
 
-          iteration.j++;
-          items[iteration.j].style.backgroundColor = "black";
-        }
+  //      check every full iteration if i sorted if i set stop = break
 
-        if (iteration.i === arr.length - (2 + iteration.done) ) {
-          items[iteration.i].style.backgroundColor = "red";
-          iteration.i = 0;
-          console.log(iteration.done)
+  //       reset color meaning clear previous background colors;
+  //       reset i and j after they hot arr,length and check to see if we made any changes;
 
-        } else {
-          items[iteration.i].style.backgroundColor = "red";
-          iteration.i++;
-          items[iteration.i].style.backgroundColor = "blue";
-        }
-      }, j * 100);
-    })(j, iteration);
-  }
+  //       fix j bug
+  //       fix colors
+  //       make it sort properly
+  //       have a state to end
+
+  //     we are dragging greatest value at the end
+  //    [30,23,455,24];
+  //    let i = arr[i];
+  //    let j  = arr[i + 1]
+  // if(i < j){
+  //   i = j
+  //   j = next
+  // }
+  // 30 > 23
+  // items[j] = i
+  // items[i] = j
+
+  //     compare i and j
+  //     move up i and j
+  //     placed when value is placed at the end hightlight it green
+  //     if we are done sorting break
+  //       */
+  //   /*
+  //       items
+  //       arr[itrations]
+
+  //       swap
+  //       we never swap the values in our array
+  //      */
+
+  //   // if (stop === "break") break;
+  //   //if everything is sorted: return true and break
+  // }
 
   //   // await compare();
 
