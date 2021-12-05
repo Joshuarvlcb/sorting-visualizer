@@ -24,6 +24,7 @@
 .array-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
   .array {
     display: flex;
     height: 700px;
@@ -33,6 +34,7 @@
 
 .item {
   width: 2rem;
+  transition: 0.1s ease-in height;
   background-color: #04948a;
   margin-left: 0.2rem;
 }

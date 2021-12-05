@@ -1,7 +1,8 @@
 import { bubbleSort } from "./bubbleSort";
 import { useState, useRef, useEffect } from "react";
 import Item from "./Item";
-
+import { selectionSort } from "./selectionSort";
+import { insertionSort } from "./insertionSort";
 function App() {
   const [tick, setTick] = useState(0);
   const [range, setRange] = useState(30);
@@ -53,9 +54,25 @@ function App() {
           >
             bubble sort
           </button>
-          <button>insertion sort</button>
+          <button
+            onClick={() => {
+              const DOMitems = [...document.getElementsByClassName("item")];
+              selectionSort(array, DOMitems);
+            }}
+          >
+            selection sort
+          </button>
+          <button
+            onClick={() => {
+              const DOMitems = [...document.getElementsByClassName("item")];
+              console.log(insertionSort(array, DOMitems));
+            }}
+          >
+            insertion sort
+          </button>
           <button>radix sort</button>
           <button>merge sort</button>
+          <button>quick sort</button>
         </div>
         <button
           onClick={() => {

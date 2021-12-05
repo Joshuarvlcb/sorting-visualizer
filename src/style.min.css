@@ -6,7 +6,28 @@
   padding: 0;
 }
 
-.array {
+.header {
+  display: flex;
+  padding: 2.8rem 2rem;
+  background-color: #0f1446;
+}
+.header button {
+  color: white;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.array-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.array-container .array {
   display: flex;
   height: 700px;
   width: 700px;
@@ -14,6 +35,7 @@
 
 .item {
   width: 2rem;
-  background-color: red;
+  transition: 0.1s ease-in height;
+  background-color: #04948a;
   margin-left: 0.2rem;
 }/*# sourceMappingURL=style.min.css.map */

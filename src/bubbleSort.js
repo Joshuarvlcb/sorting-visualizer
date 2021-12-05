@@ -20,9 +20,7 @@ export const bubbleSort = async (arr, items) => {
     });
     return hi;
   };
-  let index = 0;
   let counter = 0;
-  let stop = false;
   let bubble;
   bubble = setInterval(() => {
     if (arr[iteration.j] < arr[iteration.i]) {
@@ -33,7 +31,7 @@ export const bubbleSort = async (arr, items) => {
         30,40
         40 = 30
         30 = 40
-*/ stop = true;
+*/
       let temp = arr[iteration.j];
       arr[iteration.j] = arr[iteration.i];
       arr[iteration.i] = temp;
@@ -41,19 +39,10 @@ export const bubbleSort = async (arr, items) => {
       items[iteration.j].style.height = arr[iteration.j] + "%";
     }
     if (iteration.j == arr.length - (1 + counter)) {
-      items[iteration.j].style.backgroundColor = "red";
       iteration.j = 1;
       counter++;
+
       //get sorted bar turn htem into green
-      if (stop) stop = false;
-      else {
-        items[iteration.j].style.backgroundColor = "#28E0D4";
-        items[iteration.i].style.backgroundColor = "#28E0D4";
-        items.forEach((elem) => {
-          elem.style.backgroundColor = "#28E0D4";
-        });
-        clearInterval(bubble);
-      }
     } else {
       iteration.j++;
       console.log(counter);
@@ -66,13 +55,17 @@ export const bubbleSort = async (arr, items) => {
       /*
         how can we get the sorted bar    
       */
+      if (counter == arr.length - 1) {
+        items[iteration.i].style.backgroundColor = "#28E0D4";
+        clearInterval(bubble);
+      }
       items[items.length - counter].style.backgroundColor = "#28E0D4";
     } else {
       items[iteration.i].style.backgroundColor = "#04948a";
       iteration.i++;
       items[iteration.i].style.backgroundColor = "#FFA159";
     }
-  }, 30);
+  }, 50);
 
   // while (bubble) {
   //   index++;
