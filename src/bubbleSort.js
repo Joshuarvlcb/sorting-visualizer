@@ -1,4 +1,4 @@
-export const bubbleSort = async (arr, items) => {
+export const bubbleSort = async (arr, items, setDisable) => {
   let iteration = {
     i: 0,
     j: 1,
@@ -57,6 +57,7 @@ export const bubbleSort = async (arr, items) => {
       */
       if (counter == arr.length - 1) {
         items[iteration.i].style.backgroundColor = "#28E0D4";
+        setDisable(false);
         clearInterval(bubble);
       }
       items[items.length - counter].style.backgroundColor = "#28E0D4";
