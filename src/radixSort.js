@@ -99,13 +99,23 @@ export const radixSort = (arr, items) => {
   let j = 0;
   let go = true;
   let buckets = Array.from({ length: 10 }, () => []);
+  console.log(arr.length);
   const radix = setInterval(() => {
     if (j == arr.length - 1 && go) {
+      let counter = 0;
+      [...buckets].forEach((num) => {
+        num.forEach((_) => {
+          counter++;
+        });
+      });
+      console.log(counter);
       items[j].style.backgroundColor = "#04948a";
       k++;
       //sort
       arr = [].concat(...buckets);
-      j = 0;
+      console.log(arr.length);
+      console.log(j);
+
       //loop over items and give them new values
       //we want this to happen only wher we are done looping
       //stop
@@ -130,36 +140,47 @@ export const radixSort = (arr, items) => {
 
 }
     */
+
       let copy = Object.entries(arr);
-      console.log(copy);
+      // console.log(copy);
+      // console.log(...buckets);
+      // console.log(arr);
       items[key].style.backgroundColor = "red";
+      let used = [];
+      let randy = () => {
+        let val = Math.floor(Math.random() * copy.length - 1) + 1;
+        if (used.includes(copy[val][0])) {
+          return randy();
+        }
+        used.push(copy[val][0]);
+        return val;
+      };
       const animateBars = setInterval(() => {
         //randomize index
         //items = indexValue
-        let val = Math.floor(Math.random() * copy.length - 1) + 1;
-        // copy.splice(val, 1);
         /*
         store index and value
         index = value
         */
-        console.log(val);
-        items[val].style.backgroundColor = "#04948a";
-        items[val].style.height = copy[val][1] + "%";
+        items[key].style.backgroundColor = "#04948a";
+        items[key].style.height = arr[key] + "%";
         key++;
-        items[val].style.backgroundColor = "red";
+        items[key].style.backgroundColor = "red";
 
         if (key == arr.length) {
-          items[val].style.backgroundColor = "#04948a";
+          items[key].style.backgroundColor = "#04948a";
 
           setTimeout(() => {
             go = true;
             buckets = Array.from({ length: 10 }, () => []);
-          }, 50);
+            j = 0;
+          }, 500);
+          used = [];
+
           clearInterval(animateBars);
         }
       }, 20);
 
-      used = [];
       if (k == largestDigit) {
         //animate bars
         //clearInterval
@@ -167,13 +188,14 @@ export const radixSort = (arr, items) => {
         clearInterval(radix);
       }
     } else if (go) {
+      buckets[getDigit(arr[j], k)].push(arr[j]);
       /*
       bucket logic
       get the index of the number then push number
       */
-      buckets[getDigit(arr[j], k)].push(arr[j]);
       items[j].style.backgroundColor = "#04948a";
       j++;
+
       items[j].style.backgroundColor = "black";
     }
   }, 50);

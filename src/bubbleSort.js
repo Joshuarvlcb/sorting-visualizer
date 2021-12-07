@@ -11,15 +11,6 @@ export const bubbleSort = async (arr, items, setDisable) => {
   //   let arrClone = arr.slice();
 
   let j = 0;
-  const done = async () => {
-    let hi = new Promise(function (resolve, reject) {
-      setTimeout(() => {
-        if (iteration.sorted === "done") resolve(true);
-        else reject(false);
-      }, j * 40);
-    });
-    return hi;
-  };
   let counter = 0;
   let bubble;
   bubble = setInterval(() => {

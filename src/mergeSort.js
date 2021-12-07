@@ -133,6 +133,7 @@ clear iteral when pointers reach results.length
       items[i].style.height = results[i] + "%";
     });
   }, j * 200);
+  //results
   return results;
 };
 export const mergeSort = (arr, items, low, hi) => {
