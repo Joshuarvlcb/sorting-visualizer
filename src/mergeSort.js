@@ -31,122 +31,107 @@ promises
 */
 
 // setInterval(() => {}, 200);
-const mergeArrays = (arr1, arr2, items, hi, low) => {
-  console.log(hi, low);
-  let results = [];
-  let i = 0;
-  let j = 0;
-  let elemenets = [];
-  /*
-    push dom elements
-    pass in hi and low
-    after all the while loops are done i slice items array with hi and low  
+const waitforme = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
+// const asyncSwap = async (item, val) => {
+//   await syncSetTimeout(25);
+//   item.style.height = val + "%";
+// };
+let delay = 50;
+async function merge(ele, low, mid, high) {
+  console.log(`low=${low}, mid=${mid}, high=${high}`);
+  const n1 = mid - low + 1;
+  const n2 = high - mid;
+  console.log(`n1=${n1}, n2=${n2}`);
+  let left = new Array(n1);
+  let right = new Array(n2);
 
-    ?why do i need to know the low and high why not use i 
-    so i can select the elements i want to sort
+  for (let i = 0; i < n1; i++) {
+    await waitforme(delay);
+    // console.log("In merge left loop");
+    // console.log(ele[low + i].style.height + " at " + (low + i));
+    // color
+    ele[low + i].style.background = "#FCBA32";
+    left[i] = ele[low + i].style.height;
+  }
+  for (let i = 0; i < n2; i++) {
+    await waitforme(delay);
+    // console.log("In merge right loop");
+    // console.log(ele[mid + 1 + i].style.height + " at " + (mid + 1 + i));
+    // color
+    ele[mid + 1 + i].style.background = "#4DFFF0";
+    right[i] = ele[mid + 1 + i].style.height;
+  }
+  await waitforme(delay);
+  let i = 0,
+    j = 0,
+    k = low;
+  while (i < n1 && j < n2) {
+    await waitforme(delay);
+    // console.log("In merge while loop");
+    // console.log(parseInt(left[i]), parseInt(right[j]));
 
-    ?i need to wait for the left and right to finish
-    
+    // To add color for which two r being compared for merging
 
+    if (parseInt(left[i]) <= parseInt(right[j])) {
+      // color
+      if (n1 + n2 === ele.length) {
+        ele[k].style.background = "green";
+      } else {
+        ele[k].style.background = "lightgreen";
+      }
 
-     */
-  //  console.log(items)
-
-  while (i < arr1.length && j < arr2.length) {
-    //global key
-    if (arr1[i] < arr2[j]) {
-      let key = 0;
-      results.push(arr1[i]);
-      let find = items.find((id) => {
-        return id.id == arr1[i];
-      });
-      elemenets.push(find);
-
+      ele[k].style.height = left[i];
       i++;
+      k++;
     } else {
-      let key = 0;
-
-      results.push(arr2[j]);
-      let find = items.find((id) => {
-        return id.id == arr2[j];
-      });
-      elemenets.push(find);
-      //   let merge = setInterval(() => {
-      // if (key == results.length) clearInterval(merge);
-      // items[key].style.height = results[key] + "%";
-      // key++;
-      //   }, 200);
+      // color
+      if (n1 + n2 === ele.length) {
+        ele[k].style.background = "green";
+      } else {
+        ele[k].style.background = "lightgreen";
+      }
+      ele[k].style.height = right[j];
       j++;
+      k++;
     }
   }
-  let key = 0;
-
-  while (i < arr1.length) {
-    let key = 0;
-    results.push(arr1[i]);
-    let find = items.find((id) => {
-      return id.id == arr1[i];
-    });
-    elemenets.push(find);
-    // let merge = setInterval(() => {
-    //   if (key == results.length) clearInterval(merge);
-    //   items[key].style.height = results[key] + "%";
-
-    //   key++;
-    // }, 200);
+  while (i < n1) {
+    await waitforme(delay);
+    // color
+    if (n1 + n2 === ele.length) {
+      ele[k].style.background = "green";
+    } else {
+      ele[k].style.background = "lightgreen";
+    }
+    ele[k].style.height = left[i];
     i++;
+    k++;
   }
-  //await
-
-  while (j < arr2.length) {
-    let key = 0;
-    results.push(arr2[j]);
-    let find = items.find((id) => {
-      return id.id == arr2[j];
-    });
-
-    elemenets.push(find);
-    // let merge = setInterval(() => {
-    //   if (key == results.length) clearInterval(merge);
-    //   items[key].style.height = results[key] + "%";
-    //   key++;
-    // }, 200);
+  while (j < n2) {
+    await waitforme(delay);
+    // color
+    if (n1 + n2 === ele.length) {
+      ele[k].style.background = "green";
+    } else {
+      ele[k].style.background = "lightgreen";
+    }
+    ele[k].style.height = right[j];
     j++;
+    k++;
   }
-  //await
-  /*
-    i have to grab all the current elments
-    and swap them 
-    change the height
+}
 
-    sort the current elemetns in the dom
-     console.log(elemenets)
-     let step = 0
-     /*
-    how can i animate every single step
-when we push results
-setIterval have poiinter
-clear iteral when pointers reach results.length
-      */
-  setTimeout(() => {
-    elemenets.forEach((elem, i) => {
-      items[i].style.height = results[i] + "%";
-    });
-  }, j * 200);
-  //results
-  return results;
-};
-export const mergeSort = (arr, items, low, hi) => {
-  /*
-    break up the array into halves until that array is empty or have one empty array
-     */
-  if (arr.length <= 1) return arr;
-  //
-  let half = Math.floor(arr.length / 2);
-  let indexHalf = Math.floor((hi + 1 + low) / 2);
-  console.log(low, hi);
-  let left = mergeSort(arr.slice(0, half), items, low, indexHalf - 1);
-  let right = mergeSort(arr.slice(half), items, indexHalf, hi);
-
-  return mergeArrays(left, right, items, hi, low);
-};
+export async function mergeSort(ele, l, r) {
+  if (l >= r) {
+    return;
+  }
+  const m = l + Math.floor((r - l) / 2);
+  //   console.log(`left=${l} mid=${m} right=${r}`, typeof m);
+  await mergeSort(ele, l, m);
+  await mergeSort(ele, m + 1, r);
+  await merge(ele, l, m, r);
+}

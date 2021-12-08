@@ -101,15 +101,15 @@ export const radixSort = (arr, items) => {
   let buckets = Array.from({ length: 10 }, () => []);
   console.log(arr.length);
   const radix = setInterval(() => {
-    if (j == arr.length - 1 && go) {
-      let counter = 0;
-      [...buckets].forEach((num) => {
-        num.forEach((_) => {
-          counter++;
-        });
-      });
-      console.log(counter);
-      items[j].style.backgroundColor = "#04948a";
+    if (j == arr.length && go) {
+      //   let counter = 0;
+      //   [...buckets].forEach((num) => {
+      // num.forEach((_) => {
+      //   counter++;
+      // });
+      //   });
+      //   console.log(counter);
+      //   items[j].style.backgroundColor = "#04948a";
       k++;
       //sort
       arr = [].concat(...buckets);
@@ -145,7 +145,6 @@ export const radixSort = (arr, items) => {
       // console.log(copy);
       // console.log(...buckets);
       // console.log(arr);
-      items[key].style.backgroundColor = "red";
       let used = [];
       let randy = () => {
         let val = Math.floor(Math.random() * copy.length - 1) + 1;
@@ -156,19 +155,23 @@ export const radixSort = (arr, items) => {
         return val;
       };
       const animateBars = setInterval(() => {
+        let val = randy();
         //randomize index
         //items = indexValue
         /*
         store index and value
         index = value
         */
-        items[key].style.backgroundColor = "#04948a";
-        items[key].style.height = arr[key] + "%";
-        key++;
-        items[key].style.backgroundColor = "red";
+        items[val].style.backgroundColor = "#1358B3";
+        items[val].style.height = copy[val][1] + "%";
+        if (k == largestDigit) {
+          items[val].style.backgroundColor = "#288026";
+        } else {
+          items[val].style.backgroundColor = "#4DFFF0";
+        }
 
-        if (key == arr.length) {
-          items[key].style.backgroundColor = "#04948a";
+        if (key == arr.length - 1) {
+          //   items[val].style.backgroundColor = "#04948a";
 
           setTimeout(() => {
             go = true;
@@ -179,6 +182,7 @@ export const radixSort = (arr, items) => {
 
           clearInterval(animateBars);
         }
+        key++;
       }, 20);
 
       if (k == largestDigit) {
@@ -188,15 +192,19 @@ export const radixSort = (arr, items) => {
         clearInterval(radix);
       }
     } else if (go) {
+      console.log(j, arr[j]);
       buckets[getDigit(arr[j], k)].push(arr[j]);
       /*
       bucket logic
       get the index of the number then push number
       */
-      items[j].style.backgroundColor = "#04948a";
+      if (arr?.[j]) {
+        items[j].style.backgroundColor = "#1358B3";
+      }
       j++;
-
-      items[j].style.backgroundColor = "black";
+      if (arr?.[j]) {
+        items[j].style.backgroundColor = "#FCBA32";
+      }
     }
   }, 50);
 

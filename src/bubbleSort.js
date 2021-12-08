@@ -37,25 +37,25 @@ export const bubbleSort = async (arr, items, setDisable) => {
     } else {
       iteration.j++;
       console.log(counter);
-      items[iteration.j].style.backgroundColor = "rgb(84, 189, 221)";
+      items[iteration.j].style.backgroundColor = "#4DFFF0";
     }
     if (iteration.i == arr.length - (1 + counter)) {
-      items[iteration.i].style.backgroundColor = "#04948A";
+      items[iteration.i].style.backgroundColor = "#1358B3";
       iteration.i = 0;
       //get sorted bar turn htem into green
       /*
         how can we get the sorted bar    
       */
       if (counter == arr.length - 1) {
-        items[iteration.i].style.backgroundColor = "#28E0D4";
+        items[iteration.i].style.backgroundColor = "#288026"; //green
         setDisable(false);
         clearInterval(bubble);
       }
-      items[items.length - counter].style.backgroundColor = "#28E0D4";
+      items[items.length - counter].style.backgroundColor = "#288026"; //green
     } else {
-      items[iteration.i].style.backgroundColor = "#04948a";
+      items[iteration.i].style.backgroundColor = "#1358B3";
       iteration.i++;
-      items[iteration.i].style.backgroundColor = "#FFA159";
+      items[iteration.i].style.backgroundColor = "#FCBA32";
     }
   }, 50);
 

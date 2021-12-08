@@ -98,19 +98,19 @@ export const insertionSort = (arr, items) => {
       current = arr[i];
       //reselt colors
       items.forEach(function (elem) {
-        elem.style.backgroundColor = "#04948a";
+        elem.style.backgroundColor = "#1358B3";
       });
 
       if (i == arr.length) {
         clearInterval(insertion);
       }
       for (let key = 0; key <= i - 1; key++) {
-        items[key].style.backgroundColor = "green";
+        items[key].style.backgroundColor = "#288026";
       }
     } else {
-      items[j].style.backgroundColor = "green";
+      items[j].style.backgroundColor = "#288026";
       j--;
-      items[j].style.backgroundColor = "black";
+      items[j].style.backgroundColor = "#FCBA32";
     }
   }, 60);
 };

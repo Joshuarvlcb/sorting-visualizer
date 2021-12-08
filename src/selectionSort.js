@@ -73,7 +73,7 @@ if sorted make it yellow
   let j = 1;
   let min = i;
   let swap = true;
-  items[min].style.backgroundColor = "red";
+  items[min].style.backgroundColor = "#FCBA32";
 
   let selection = setInterval(() => {
     //compare
@@ -90,10 +90,10 @@ if sorted make it yellow
     */
     if (arr[min] > arr[j]) {
       console.log(min);
-      items[min].style.backgroundColor = "#04948a";
+      items[min].style.backgroundColor = "#1358B3";
       min = j;
       setTimeout(() => {
-        items[min].style.backgroundColor = "red";
+        items[min].style.backgroundColor = "#FCBA32";
       }, 5);
       console.log(min);
       //color of where min is
@@ -118,22 +118,22 @@ if sorted make it yellow
 
       //reselt colors
       items.forEach(function (elem) {
-        elem.style.backgroundColor = "#04948a";
+        elem.style.backgroundColor = "#1358B3";
       });
 
       //make sorted yellow colors
       for (let key = 0; key <= i; key++) {
-        items[key].style.backgroundColor = "green";
+        items[key].style.backgroundColor = "#288026";
       }
       i++;
       j = i + 1;
       min = i;
-      items[min].style.backgroundColor = "red";
+      items[min].style.backgroundColor = "#FCBA32";
       if (j === arr.length) {
         items.forEach(function (elem) {
-          elem.style.backgroundColor = "green";
+          elem.style.backgroundColor = "#288026";
         });
-        items[min].style.backgroundColor = "green";
+        items[min].style.backgroundColor = "#288026";
 
         let sorted = [...arr].sort((a, b) => a - b);
         for (let i in sorted) {
@@ -145,9 +145,9 @@ if sorted make it yellow
       }
     } else {
       //#04948a
-      items[j].style.backgroundColor = "#04948a";
+      items[j].style.backgroundColor = "#1358B3";
       j++;
-      items[j].style.backgroundColor = "black";
+      items[j].style.backgroundColor = "#4DFFF0";
     }
 
     //swap at the end else increment

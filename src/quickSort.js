@@ -1,6 +1,6 @@
 export const quickSort = async (
   arr,
-  left = 50,
+  left = 0,
   right = arr.length - 1,
   items
 ) => {
@@ -27,7 +27,7 @@ export const quickSort = async (
   };
 
   const asyncSwap = async (start, swap) => {
-    await syncSetTimeout(100);
+    await syncSetTimeout(0);
     items[start].style.height = arr[swap] + "%";
     items[swap].style.height = arr[start] + "%";
   };
@@ -46,23 +46,35 @@ export const quickSort = async (
   };
 
   const pivot = async (arr, start = 0, end = arr.length - 1) => {
+    //check to see if array is sorted
     //!stop multiple processes
-    //!have left and right pointer 
-    await syncSetTimeout(100);
+    //!have left and right pointer
     let pivot = arr[start];
     let swapIndex = start;
+
     //loop from start to end
     // console.log(start);
     //reset pivot color
-    await pivotIndex(start, "pink");
-    await pivotIndex(end, "blue");
+    // await pivotIndex(start, "black");
+    // await pivotIndex(swapIndex, "yellow");
+    await pivotIndex(end, "red");
+    await syncSetTimeout(100);
 
-    console.log(items[start]);
-
-    for (let i = start + 1; i < arr.length; i++) {
+    for (let i = start; i < end + 1; i++) {
+      //   await pivotIndex(i, "red", 20);
+      if (i !== end) {
+        await pivotIndex(i, "#FF0AE7", 50);
+      }
       if (pivot > arr[i]) {
+        // await pivotIndex(swapIndex, "#04948a");
+        // await pivotIndex(swapIndex, "#04948a");
         swapIndex++;
+        // await pivotIndex(swapIndex, "yellow");
+
+        // await pivotIndex(swapIndex, "black");
         await asyncSwap(i, swapIndex);
+        // items[i].style.height = arr[swapIndex] + "%";
+        // // items[swapIndex].style.height = arr[start] + "%";
         let temp = arr[i];
         arr[i] = arr[swapIndex];
         arr[swapIndex] = temp;
@@ -70,10 +82,16 @@ export const quickSort = async (
         // items[swapIndex].style.height = temp + "%";
       }
     }
-    await pivotIndex(start, "#04948a");
-    await pivotIndex(end, "#04948a");
-
-    console.log(items[start]);
+    // if (items[start - 1]?.style.backgroundColor === "black") {
+    //   for (let i = start; i < end; i++) {
+    // await pivotIndex(i, "green", 50);
+    //   }
+    // }
+    // await pivotIndex(start, "#04948a");
+    // await pivotIndex(end, "#04948a");
+    // for (let i = start + 1; i < arr.length; i++) {
+    //   await pivotIndex(i, "#04948a", 20);
+    // }
 
     // for (let i = start + 1; i < end; i++) {
     //   await pivotIndex(i, "#04948a", 20);
@@ -90,21 +108,33 @@ export const quickSort = async (
     let temp = arr[start];
     arr[start] = arr[swapIndex];
     arr[swapIndex] = temp;
-    await syncSetTimeout(100);
 
-    // await pivotIndex(start, "blue");
+    for (let i = start; i < end; i++) {
+      await pivotIndex(i, "#1358B3");
+    }
+    //pivot
+    await pivotIndex(swapIndex, "#288026", 50);
+
+    await pivotIndex(end, "#1358B3");
 
     return swapIndex;
   };
+
   if (left < right) {
     //use while loop to animate left and right pointers
     let pivIndex = await pivot(arr, left, right);
     //left
     //right
-    Promise.all([
-      quickSort(arr, left, pivIndex - 1, items),
-      quickSort(arr, pivIndex + 1, right, items),
-    ]);
+
+    await quickSort(arr, left, pivIndex - 1, items);
+    await quickSort(arr, pivIndex + 1, right, items);
+  } else {
+    if (left < arr.length && right > -1 && right < arr.length) {
+      items[left].style.backgroundColor = "#288026";
+      items[right].style.backgroundColor = "#288026";
+    }
+    console.log(left);
+    // console.log(right);
   }
   return arr;
 };

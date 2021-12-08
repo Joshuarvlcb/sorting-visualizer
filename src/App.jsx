@@ -87,7 +87,7 @@ function App() {
             disabled={disable}
             onClick={() => {
               const DOMitems = [...document.getElementsByClassName("item")];
-              console.log(mergeSort(array, DOMitems, 0, array.length - 1));
+              console.log(mergeSort(DOMitems, 0, array.length - 1));
             }}
           >
             merge sort
