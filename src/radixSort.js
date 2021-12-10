@@ -167,7 +167,7 @@ export const radixSort = (arr, items) => {
         if (k == largestDigit) {
           items[val].style.backgroundColor = "#288026";
         } else {
-          items[val].style.backgroundColor = "#4DFFF0";
+          items[val].style.backgroundColor = "red";
         }
 
         if (key == arr.length - 1) {

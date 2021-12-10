@@ -37,14 +37,14 @@ function App() {
           <input
             type="range"
             min={10}
-            max={100}
+            max={60}
             disabled={disable}
             onChange={(e) => {
               console.log(e.target.value);
               setRange(e.target.value);
               setArray(
                 new Array(+e.target.value).fill("").map((_, i) => {
-                  return Math.random() * (100 - 30) + 30;
+                  return Math.random() * (70 - 30) + 30;
                 })
               );
             }}

@@ -37,7 +37,7 @@ export const bubbleSort = async (arr, items, setDisable) => {
     } else {
       iteration.j++;
       console.log(counter);
-      items[iteration.j].style.backgroundColor = "#4DFFF0";
+      items[iteration.j].style.backgroundColor = "#EB9AAD";
     }
     if (iteration.i == arr.length - (1 + counter)) {
       items[iteration.i].style.backgroundColor = "#1358B3";
@@ -55,7 +55,7 @@ export const bubbleSort = async (arr, items, setDisable) => {
     } else {
       items[iteration.i].style.backgroundColor = "#1358B3";
       iteration.i++;
-      items[iteration.i].style.backgroundColor = "#FCBA32";
+      items[iteration.i].style.backgroundColor = "#EBE79D";
     }
   }, 50);
 
