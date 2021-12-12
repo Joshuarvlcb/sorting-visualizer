@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Item from "./Item";
-import { bubbleSort } from "./bubbleSort";
+import { BubbleSort } from "./bubbleSort";
 import { selectionSort } from "./selectionSort";
 import { insertionSort } from "./insertionSort";
 import { mergeSort } from "./mergeSort";
@@ -9,27 +9,29 @@ import { quickSort } from "./quickSort";
 
 function App() {
   const [disable, setDisable] = useState(false);
-  const [tick, setTick] = useState(0);
-  const [range, setRange] = useState(30);
+  const [range, setRange] = useState(35);
   const [array, setArray] = useState(
     new Array(+range).fill("").map((_, i) => {
       return Math.random() * (70 - 30) + 30;
     })
   );
+  const [activeAlgo, setActiveAlgo] = useState(null);
   const [speed, setSpeed] = useState(100);
+
   useEffect(() => {
-    console.log(array);
-    const items = [...document.getElementsByClassName("item")];
-    console.log(items);
-  }, [array]);
-  /*
-  bubble sort current array
- 
-  */
-  // const liveBubbleSort = () => {
-  //   console.log(bubbleSort(array, setArray));
-  // };
-  // liveBubbleSort();
+    console.log(speed);
+  }, [speed]);
+  const calcSpeed = (range) => {
+    let speed = 100;
+    if ((range >= 10) & (range <= 25)) {
+      speed = 150;
+    } else if (range >= 25 && range <= 40) {
+      speed = 100;
+    } else if (range >= 40 && range <= 60) {
+      speed = 50;
+    }
+    return speed;
+  };
   return (
     <div className="App">
       <header className="header">
@@ -38,74 +40,171 @@ function App() {
             type="range"
             min={10}
             max={60}
+            value={range}
             disabled={disable}
             onChange={(e) => {
-              console.log(e.target.value);
               setRange(e.target.value);
               setArray(
-                new Array(+e.target.value).fill("").map((_, i) => {
+                new Array(+range).fill("").map((_, i) => {
                   return Math.random() * (70 - 30) + 30;
                 })
               );
+              const DOMitems = [...document.getElementsByClassName("item")];
+              DOMitems.forEach((curr) => {
+                curr.style.backgroundColor = "#1358b3";
+              });
+              setSpeed(calcSpeed(range));
             }}
           />
-          <p className="size">size and speed</p>
+          <p>size & speed</p>
         </div>
 
         <div className="button-container">
           <button
+            style={{
+              color: `${
+                activeAlgo == "bubble" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
             onClick={async () => {
+              setActiveAlgo("bubble");
               const DOMitems = [...document.getElementsByClassName("item")];
               setDisable(true);
-              await new Promise((resolve) =>
-                resolve(bubbleSort(array, DOMitems, setDisable))
-              );
+              BubbleSort(array, DOMitems, speed).then((res) => {
+                setDisable(false);
+                setArray(res);
+              });
             }}
           >
             bubble sort
           </button>
           <button
+            style={{
+              color: `${
+                activeAlgo == "selectionSort" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
             onClick={() => {
               const DOMitems = [...document.getElementsByClassName("item")];
-              selectionSort(array, DOMitems);
+              setDisable(true);
+
+              setActiveAlgo("selectionSort");
+              selectionSort(array, DOMitems, speed).then((res) => {
+                setDisable(false);
+                setArray(res);
+              });
             }}
           >
             selection sort
           </button>
           <button
+            style={{
+              color: `${
+                activeAlgo == "insertionSort" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
             onClick={() => {
               const DOMitems = [...document.getElementsByClassName("item")];
-              console.log(insertionSort(array, DOMitems));
+              setDisable(true);
+
+              setActiveAlgo("insertionSort");
+
+              insertionSort(array, DOMitems, speed).then((res) => {
+                setDisable(false);
+                setArray(res);
+              });
             }}
           >
             insertion sort
           </button>
           <button
+            style={{
+              color: `${
+                activeAlgo == "mergeSort" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
             onClick={() => {
+              setDisable(true);
+              setActiveAlgo("mergeSort");
+
               const DOMitems = [...document.getElementsByClassName("item")];
-              console.log(mergeSort(DOMitems, 0, array.length - 1));
+              mergeSort(DOMitems, 0, array.length - 1, speed).then((_) => {
+                setDisable(false);
+                setArray(array.sort((a, b) => a - b));
+              });
             }}
           >
             merge sort
           </button>
           <button
+            style={{
+              color: `${
+                activeAlgo == "radixSort" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
             onClick={() => {
+              setDisable(true);
+
+              setActiveAlgo("radixSort");
               const DOMitems = [...document.getElementsByClassName("item")];
-              console.log(radixSort(array, DOMitems));
+              radixSort(array, DOMitems, speed).then((res) => {
+                setDisable(false);
+                setArray(res);
+              });
             }}
           >
             radix sort
           </button>
           <button
+            style={{
+              color: `${
+                activeAlgo == "quickSort" && disable
+                  ? "#00E01A"
+                  : !disable
+                  ? "white"
+                  : "red"
+              }`,
+            }}
             disabled={disable}
-            onClick={() => {
+            onClick={async () => {
+              setDisable(true);
+
+              setActiveAlgo("quickSort");
               const DOMitems = [...document.getElementsByClassName("item")];
-              console.log(quickSort(array, 0, array.length - 1, DOMitems));
+
+              quickSort(array, 0, array.length - 1, DOMitems, speed).then(
+                (res) => {
+                  setDisable(false);
+                  setArray(res);
+                  DOMitems[DOMitems.length - 1].style.backgroundColor =
+                    "#288026";
+                }
+              );
             }}
           >
             quick sort
@@ -113,13 +212,18 @@ function App() {
         </div>
         <button
           disabled={disable}
+          style={{ color: `${disable ? "red" : "white"}` }}
           onClick={() => {
             //complementary colors adobe color wheel
             setArray(
               new Array(+range).fill("").map((_, i) => {
-                return Math.random() * (100 - 30) + 30;
+                return Math.random() * (70 - 30) + 30;
               })
             );
+            const DOMitems = [...document.getElementsByClassName("item")];
+            DOMitems.forEach((curr) => {
+              curr.style.backgroundColor = "#1358b3";
+            });
           }}
         >
           generate new array
@@ -127,14 +231,11 @@ function App() {
       </header>
       <div className="array-container">
         <div className="array">
-          {array.map((height, i) => {
-            if (i === array.length - 1) {
-              console.log(height);
-            }
-
-            return <Item key={height} height={height} />;
+          {array.map((height) => {
+            return <Item height={height} />;
           })}
         </div>
+        <div className="transition"></div>
       </div>
     </div>
   );

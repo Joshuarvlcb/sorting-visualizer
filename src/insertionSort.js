@@ -1,4 +1,4 @@
-export const insertionSort = (arr, items) => {
+export const insertionSort = (arr, items, speed) => {
   /*
     how does inserion sort work?
 
@@ -85,32 +85,35 @@ export const insertionSort = (arr, items) => {
   let i = 1;
   let j = i - 1;
   let current = arr[i];
-  let insertion = setInterval(() => {
-    if (arr[j] > current) {
-      items[j + 1].style.height = arr[j] + "%";
-      items[j].style.height = current + "%";
-      arr[j + 1] = arr[j];
-      arr[j] = current;
-    }
-    if (j == 0 || arr[j] < current) {
-      i++;
-      j = i - 1;
-      current = arr[i];
-      //reselt colors
-      items.forEach(function (elem) {
-        elem.style.backgroundColor = "#1358B3";
-      });
+  return new Promise((resolve, reject) => {
+    let insertion = setInterval(() => {
+      if (arr[j] > current) {
+        items[j + 1].style.height = arr[j] + "%";
+        items[j].style.height = current + "%";
+        arr[j + 1] = arr[j];
+        arr[j] = current;
+      }
+      if (j == 0 || arr[j] < current) {
+        i++;
+        j = i - 1;
+        current = arr[i];
+        //reselt colors
+        items.forEach(function (elem) {
+          elem.style.backgroundColor = "#1358B3";
+        });
 
-      if (i == arr.length) {
-        clearInterval(insertion);
+        if (i == arr.length) {
+          clearInterval(insertion);
+          resolve(arr);
+        }
+        for (let key = 0; key <= i - 1; key++) {
+          items[key].style.backgroundColor = "#288026";
+        }
+      } else {
+        items[j].style.backgroundColor = "#288026";
+        j--;
+        items[j].style.backgroundColor = "#EBE79D";
       }
-      for (let key = 0; key <= i - 1; key++) {
-        items[key].style.backgroundColor = "#288026";
-      }
-    } else {
-      items[j].style.backgroundColor = "#288026";
-      j--;
-      items[j].style.backgroundColor = "#FCBA32";
-    }
-  }, 60);
+    }, speed + 5);
+  });
 };

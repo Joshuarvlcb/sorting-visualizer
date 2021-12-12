@@ -1,4 +1,4 @@
-export const selectionSort = (arr, items) => {
+export const selectionSort = (arr, items, speed) => {
   /*
     how it works?
     it places small values in the beggining of the array very similar to bubble sort
@@ -72,12 +72,11 @@ if sorted make it yellow
   let i = 0;
   let j = 1;
   let min = i;
-  let swap = true;
-  items[min].style.backgroundColor = "#FCBA32";
-
-  let selection = setInterval(() => {
-    //compare
-    /*
+  // items[min].style.backgroundColor = "#EB9AAD";
+  return new Promise((resolve) => {
+    let selection = setInterval(() => {
+      //compare
+      /*
     min > j
     min = j
     swap = true
@@ -88,68 +87,65 @@ if sorted make it yellow
     min = red  
     
     */
-    if (arr[min] > arr[j]) {
-      console.log(min);
-      items[min].style.backgroundColor = "#1358B3";
-      min = j;
-      setTimeout(() => {
-        items[min].style.backgroundColor = "#FCBA32";
-      }, 5);
-      console.log(min);
-      //color of where min is
-    }
+      if (arr[min] > arr[j]) {
+        console.log(min);
+        items[min].style.backgroundColor = "#1358B3";
+        min = j;
+        setTimeout(() => {
+          items[min].style.backgroundColor = "#EB9AAD";
+        }, 5);
+        console.log(min);
+        //color of where min is
+      }
 
-    /*
+      /*
     sorting is almost working'
     fix colors
     
     */
-    if (j === arr.length - 1) {
-      //swap
+      if (j === arr.length - 1) {
+        //swap
 
-      const temp = arr[i];
-      arr[i] = arr[min];
-      arr[min] = temp;
+        const temp = arr[i];
+        arr[i] = arr[min];
+        arr[min] = temp;
 
-      items[i].style.height = arr[i] + "%";
-      items[min].style.height = arr[min] + "%";
+        items[i].style.height = arr[i] + "%";
+        items[min].style.height = arr[min] + "%";
 
-      //swap height elemenets
+        //swap height elemenets
 
-      //reselt colors
-      items.forEach(function (elem) {
-        elem.style.backgroundColor = "#1358B3";
-      });
-
-      //make sorted yellow colors
-      for (let key = 0; key <= i; key++) {
-        items[key].style.backgroundColor = "#288026";
-      }
-      i++;
-      j = i + 1;
-      min = i;
-      items[min].style.backgroundColor = "#FCBA32";
-      if (j === arr.length) {
+        //reselt colors
         items.forEach(function (elem) {
-          elem.style.backgroundColor = "#288026";
+          elem.style.backgroundColor = "#1358B3";
         });
-        items[min].style.backgroundColor = "#288026";
 
-        let sorted = [...arr].sort((a, b) => a - b);
-        for (let i in sorted) {
-          if (sorted[i] !== arr[i]) {
-            console.log("array is messed up");
-          }
+        //make sorted yellow colors
+        for (let key = 0; key <= i; key++) {
+          items[key].style.backgroundColor = "#288026";
         }
-        clearInterval(selection);
+        i++;
+        j = i + 1;
+        min = i;
+        items[min].style.backgroundColor = "#EB9AAD";
+        if (j === arr.length - 1) {
+          items[min].style.backgroundColor = "#288026";
+          items[items.length - 1].style.backgroundColor = "#288026";
+          items[items.length - 2].style.backgroundColor = "#288026";
+          clearInterval(selection);
+          items.forEach(function (elem) {
+            elem.style.backgroundColor = "#288026";
+          });
+          resolve(arr);
+        }
+      } else {
+        //#04948a
+        items[j].style.backgroundColor = "#1358B3";
+        j++;
+        items[j].style.backgroundColor = "#EBE158";
       }
-    } else {
-      //#04948a
-      items[j].style.backgroundColor = "#1358B3";
-      j++;
-      items[j].style.backgroundColor = "#4DFFF0";
-    }
 
-    //swap at the end else increment
-  }, 25);
+      //swap at the end else increment
+    }, speed);
+  });
 };

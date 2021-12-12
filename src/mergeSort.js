@@ -40,8 +40,8 @@ const waitforme = (ms) => {
 //   await syncSetTimeout(25);
 //   item.style.height = val + "%";
 // };
-let delay = 50;
-async function merge(ele, low, mid, high) {
+async function merge(ele, low, mid, high, speed) {
+  let delay = speed;
   console.log(`low=${low}, mid=${mid}, high=${high}`);
   const n1 = mid - low + 1;
   const n2 = high - mid;
@@ -54,7 +54,7 @@ async function merge(ele, low, mid, high) {
     // console.log("In merge left loop");
     // console.log(ele[low + i].style.height + " at " + (low + i));
     // color
-    ele[low + i].style.background = "#FCBA32";
+    ele[low + i].style.background = "#EB9AAD";
     left[i] = ele[low + i].style.height;
   }
   for (let i = 0; i < n2; i++) {
@@ -62,7 +62,7 @@ async function merge(ele, low, mid, high) {
     // console.log("In merge right loop");
     // console.log(ele[mid + 1 + i].style.height + " at " + (mid + 1 + i));
     // color
-    ele[mid + 1 + i].style.background = "#4DFFF0";
+    ele[mid + 1 + i].style.background = "#EBE79D";
     right[i] = ele[mid + 1 + i].style.height;
   }
   await waitforme(delay);
@@ -125,13 +125,13 @@ async function merge(ele, low, mid, high) {
   }
 }
 
-export async function mergeSort(ele, l, r) {
+export async function mergeSort(ele, l, r, speed) {
   if (l >= r) {
     return;
   }
   const m = l + Math.floor((r - l) / 2);
   //   console.log(`left=${l} mid=${m} right=${r}`, typeof m);
-  await mergeSort(ele, l, m);
-  await mergeSort(ele, m + 1, r);
-  await merge(ele, l, m, r);
+  await mergeSort(ele, l, m, speed);
+  await mergeSort(ele, m + 1, r, speed);
+  await merge(ele, l, m, r, speed);
 }
