@@ -67,6 +67,7 @@ export const quickSort = async (
       //   await pivotIndex(i, "red", 20);
       if (i !== end) {
         await pivotIndex(i, "#FF8170", speed);
+        items[i].classList.add('transition')
       }
       if (pivot > arr[i]) {
         // await pivotIndex(swapIndex, "#04948a");
@@ -95,6 +96,8 @@ export const quickSort = async (
 
     for (let i = start; i < end; i++) {
       await pivotIndex(i, "#1358B3");
+      items[i].classList.remove('transition')
+
     }
     await syncSetTimeout(speed);
     //pivot

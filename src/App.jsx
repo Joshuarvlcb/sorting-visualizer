@@ -45,7 +45,7 @@ function App() {
             onChange={(e) => {
               setRange(e.target.value);
               setArray(
-                new Array(+range).fill("").map((_, i) => {
+                new Array(+e.target.value).fill("").map((_, i) => {
                   return Math.random() * (70 - 30) + 30;
                 })
               );

@@ -57,7 +57,7 @@ html {
 
 .item {
   width: 1rem;
-  transition: 0.1s ease-in-out height;
+  transition: 0.3s ease-in-out height;
   background-color: #1358b3;
   margin-left: 0.2rem;
 }
@@ -71,15 +71,12 @@ html {
 
 @keyframes barAnimation {
   0% {
-    background-color: #fd8ba7;
+    background-color: #ff8800;
   }
   50% {
-    background-color: #e595f0;
-  }
-  75% {
-    background-color: #73f1b7;
+    background-color: red;
   }
   100% {
-    background-color: #a8f7a8;
+    background-color: #ff8800;
   }
 }/*# sourceMappingURL=style.min.css.map */
