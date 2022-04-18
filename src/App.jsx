@@ -4,7 +4,6 @@ import { BubbleSort } from "./bubbleSort";
 import { selectionSort } from "./selectionSort";
 import { insertionSort } from "./insertionSort";
 import { mergeSort } from "./mergeSort";
-import { radixSort } from "./radixSort";
 import { quickSort } from "./quickSort";
 
 function App() {
