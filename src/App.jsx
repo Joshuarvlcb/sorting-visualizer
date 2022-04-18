@@ -156,7 +156,7 @@ function App() {
           >
             merge sort
           </button>
-          <button
+          {/* <button
             style={{
               color: `${
                 activeAlgo == "radixSort" && disable
@@ -179,7 +179,7 @@ function App() {
             }}
           >
             radix sort
-          </button>
+          </button> */}
           <button
             style={{
               color: `${
