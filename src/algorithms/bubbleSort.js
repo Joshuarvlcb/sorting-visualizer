@@ -7,6 +7,7 @@ export const BubbleSort = async (arr, items, speed) => {
     sorted: true,
     done: 0,
   };
+
   //keep track of i and j
   //keep track of finsihed values
   //   let arrClone = arr.slice();

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Item from "./Item";
-import { BubbleSort } from "./bubbleSort";
-import { selectionSort } from "./selectionSort";
-import { insertionSort } from "./insertionSort";
-import { mergeSort } from "./mergeSort";
-import { quickSort } from "./quickSort";
+import Item from "./components/Item";
+import { BubbleSort } from "./algorithms/bubbleSort";
+import { selectionSort } from "./algorithms/selectionSort";
+import { insertionSort } from "./algorithms/insertionSort";
+import { mergeSort } from "./algorithms/mergeSort";
+import { quickSort } from "./algorithms/quickSort";
 
 function App() {
   const [disable, setDisable] = useState(false);
@@ -18,7 +18,42 @@ function App() {
   const [speed, setSpeed] = useState(100);
 
   useEffect(() => {
-    console.log(speed);
+    const array = [23, 56, 78, 2, 1, 34, 67, Infinity];
+    const partition = (arr, l, r) => {
+      const swap = (arr, left, right) => {
+        return ([arr[left], arr[right]] = [arr[right], arr[left]]);
+      };
+
+      let pivot = arr[l];
+
+      let i = l;
+      let j = r;
+      while (i < j) {
+        do {
+          i++;
+        } while (arr[i] <= pivot);
+        do {
+          j--;
+        } while (arr[j] > pivot);
+
+        if (i < j) {
+          swap(arr, i, j);
+        }
+      }
+
+      swap(arr, l, j);
+      return j;
+    };
+
+    const quick = (l, r) => {
+      if (l < r) {
+        const pivot = partition(array, l, r);
+        quick(l, pivot);
+        quick(pivot + 1, r);
+      } else return;
+    };
+    quick(0, array.length - 1);
+    console.log(array);
   }, [speed]);
   const calcSpeed = (range) => {
     let speed = 100;
@@ -196,12 +231,10 @@ function App() {
               setActiveAlgo("quickSort");
               const DOMitems = [...document.getElementsByClassName("item")];
 
-              quickSort(array, 0, array.length - 1, DOMitems, speed).then(
+              quickSort([...array, 0], 0, array.length, DOMitems, speed).then(
                 (res) => {
                   setDisable(false);
                   setArray(res);
-                  DOMitems[DOMitems.length - 1].style.backgroundColor =
-                    "#288026";
                 }
               );
             }}

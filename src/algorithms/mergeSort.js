@@ -54,7 +54,7 @@ async function merge(ele, low, mid, high, speed) {
     // console.log("In merge left loop");
     // console.log(ele[low + i].style.height + " at " + (low + i));
     // color
-    ele[low + i].style.background = "#EB9AAD";
+    ele[low + i].style.background = "#ffafcc";
     left[i] = ele[low + i].style.height;
   }
   for (let i = 0; i < n2; i++) {
@@ -62,7 +62,7 @@ async function merge(ele, low, mid, high, speed) {
     // console.log("In merge right loop");
     // console.log(ele[mid + 1 + i].style.height + " at " + (mid + 1 + i));
     // color
-    ele[mid + 1 + i].style.background = "#EBE79D";
+    ele[mid + 1 + i].style.background = "#a2d2ff";
     right[i] = ele[mid + 1 + i].style.height;
   }
   await waitforme(delay);
@@ -76,7 +76,7 @@ async function merge(ele, low, mid, high, speed) {
 
     // To add color for which two r being compared for merging
 
-    if (parseInt(left[i]) <= parseInt(right[j])) {
+    if (parseFloat(left[i]) <= parseFloat(right[j])) {
       // color
       if (n1 + n2 === ele.length) {
         ele[k].style.background = "green";
