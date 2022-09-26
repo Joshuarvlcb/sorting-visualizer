@@ -12,7 +12,7 @@ html {
 
 .header {
   display: flex;
-  padding: 2.8rem 2rem;
+  padding: 2.8rem 0rem;
   background-color: rgb(24, 24, 24);
   justify-content: space-around;
   align-items: center;
@@ -37,7 +37,6 @@ html {
   background-color: transparent;
   font-size: 1.2rem;
   text-transform: capitalize;
-  margin-right: 1.5rem;
   cursor: pointer !important;
   font-family: monospace !important;
 }
@@ -78,5 +77,30 @@ html {
   }
   100% {
     background-color: #ff8800;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  .header {
+    flex-direction: column;
+    min-height: 400px;
+  }
+  .header p {
+    text-align: center;
+  }
+  .button-container {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .button-container button {
+    margin: 0.7rem 0;
+  }
+  .array-container .array {
+    width: 600px;
+  }
+}
+@media only screen and (max-width: 660px) {
+  .array-container .array {
+    width: 450px;
   }
 }/*# sourceMappingURL=style.css.map */
